@@ -1,13 +1,23 @@
+<<<<<<< HEAD
+import socket
+=======
 from socket import *
+>>>>>>> parent of b5f1978... Project Files.
 import pyaudio
 from Tkinter import *
 import thread
 
+<<<<<<< HEAD
+host = ("localhost", 5015)
+sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+sock.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+=======
 PORT = 5016
 
 host = ("localhost", PORT)
 sock = socket(AF_INET,SOCK_DGRAM)
 sock.setsockopt(SOL_SOCKET,SO_REUSEADDR,1)
+>>>>>>> parent of b5f1978... Project Files.
 
 CHUNK = 1024
 WIDTH = 2
@@ -24,6 +34,43 @@ def streamopen():
                         frames_per_buffer=CHUNK)
     return stream
 
+<<<<<<< HEAD
+def fetch( ):
+    msg = ent.get( )
+    ent.delete(0, len(msg)+1)
+    sock.sendto(msg, host)
+    sock.sendto(socket.gethostname(), host)
+    Label(root,text=socket.gethostname()+":    "+msg).pack(side=TOP)
+
+def recieve():
+    while True:
+        try:
+            msg = sock.recv(262144)
+            rec = sock.recv(1024)
+            Label(root,text = rec+":    "+msg).pack(side=TOP)
+        except:
+            return
+        
+sock.sendto("Start",host)
+opt = sock.recv(4)
+
+if opt=='1':
+    root = Tk()
+    root.title(string = socket.gethostname())
+    root.geometry("200x200")
+    ent = Entry(root)
+    ent.pack(side=BOTTOM, fill=X)
+    ent.focus()                # save a click
+    ent.bind('<Return>', (lambda event: fetch())) 
+    btn = Button(root,text='SEND MESSAGE',command = fetch)
+    btn.pack(side=BOTTOM, after=ent)
+    thread.start_new_thread(recieve,())
+    root.mainloop()
+elif opt=='2':
+    stream = streamopen()
+    sock.setblocking(0)
+    while True:
+=======
 #common function
 def mfetch():
     msg = ent.get( )
@@ -43,16 +90,29 @@ def recieve():
 #function for opt == 2
 def play():
     while chatflag != 1:
+>>>>>>> parent of b5f1978... Project Files.
         try:
             data = stream.read(CHUNK)
             sock.sendto(data,host)
         except:
+<<<<<<< HEAD
+            continue
+=======
             pass
+>>>>>>> parent of b5f1978... Project Files.
 
         try:
             data = sock.recv(262144)
             stream.write(data, CHUNK)
         except:
+<<<<<<< HEAD
+            continue
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    
+print("done")
+=======
             pass
         
 def stop():
@@ -141,3 +201,4 @@ elif opt == '3':
 print("done")
 imflag = 1
             
+>>>>>>> parent of b5f1978... Project Files.
